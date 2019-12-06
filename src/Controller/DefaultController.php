@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use App\Entity\Post;
 /**
  * @Route("/home", name="home.")
  */
@@ -30,15 +30,21 @@ class DefaultController extends AbstractController
 
     public function lihat(Request $request, $nama)
     {
+        $form = $this->createFormBuilder()
+        ->add('fullname', TextType::class)
+        ->getForm();
+
         $person = [
             'name' => 'Esa',
             'lastname' => 'Rizki',
             'age' => 22,
         ];
 
-        $form = $this->createFormBuilder()
-        ->add('fullname', TextType::class)
-        ->getForm();
+        $post = new Post();
+        $post->setTitle("Overseas Media");
+        $post->setDescription("Youtube Channel");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
 
         return $this->render('default/tes.html.twig', [
             'controller_name' => 'DefaultController',

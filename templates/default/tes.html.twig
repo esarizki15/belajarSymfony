@@ -10,6 +10,9 @@
 </style>
 <div class="container">
 	<h1>User Form :</h1>
-	{{form(user_form)}}
+	{{form_start(user_form)}}
+		{{form_widget(user_form.fullname)}}
+		{{form_label(user_form.task, 'Nama Lengkap')}}
+	{{form_end(user_form)}}
 </div>
 {% endblock %}
