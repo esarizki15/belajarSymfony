@@ -44,12 +44,21 @@ class DefaultController extends AbstractController
         $post->setTitle("Overseas Media");
         $post->setDescription("Youtube Channel");
         $em = $this->getDoctrine()->getManager();
-        $em->persist($post);
+        $retrievedPost = $em->getRepository(Post::class)->findOneBy([
+            'id'=>1,
+        ]);
+        // dd($retrievedPost);
+        // $em->persist($post);
+        // $em->flush();
+
+        $em->remove($retrievedPost);
+        $em->flush();
 
         return $this->render('default/tes.html.twig', [
             'controller_name' => 'DefaultController',
             // 'nama' => $nama,
             'person' => $person,
+            'post' => $retrievedPost,
             'user_form' => $form->createView(),
         ]);
     }

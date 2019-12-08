@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormController!{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="col-md-10">
+			<div class="card">
+				<div class="card-header">Form</div>
+				<div class="card-body">
+				{{form_start(post_form, {'attr': {'id': 'custom_post_form', 'class':'custom'}})}}
+				{{form_end(post_form)}}
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+{% endblock %}
