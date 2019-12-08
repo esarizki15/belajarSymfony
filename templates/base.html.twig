@@ -2,7 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css">
+        {# <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"> #}
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('build/app.css')}}">
+        
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         	{% block whatever %}{% endblock %}
@@ -10,6 +13,10 @@
     <body>
     	{# Navigation #}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <script type="text/javascripts" src="{{asset('build/app.js')}}"></script>
+        <script type="text/javascripts" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        {% block javascripts %}
+        
+        {% endblock %}
     </body>
 </html>

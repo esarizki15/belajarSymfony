@@ -9,8 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -27,6 +27,14 @@ class PostType extends AbstractType
                     'placeholder' => 'Enter the description here',
                     'class' => ''
                 ]
+            ])
+            ->add('category', EntityType::class, [
+                'class'=>'App\Entity\Category',
+            ])
+            ->add('my_file', FileType::class, [
+                'mapped' => false,
+                'label' => 'Please upload a file',
+                'multiple' => true,
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [

@@ -8,8 +8,12 @@
 			<div class="card">
 				<div class="card-header">Form</div>
 				<div class="card-body">
+					<img src="{{asset('uploads/') ~ image}}" alt="">
 				{{form_start(post_form, {'attr': {'id': 'custom_post_form', 'class':'custom'}})}}
 				{{form_end(post_form)}}
+
+				<hr>
+				{{getURL}}
 					
 				</div>
 			</div>
