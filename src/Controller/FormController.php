@@ -8,6 +8,8 @@ use App\Form\PostType;
 use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\Fetcher;
+use App\Services\Paginator;
+
 class FormController extends AbstractController
 {
     /**
@@ -39,7 +41,7 @@ class FormController extends AbstractController
     /**
      * @Route("/newpost", name="new_post")
      */
-    public function newpost(Request $request, Fetcher $fetcher)
+    public function newpost(Request $request, Fetcher $fetcher, Paginator $paginator)
     {
         //URL : https://api.coinmarketcap.com/v2/listings/
 
@@ -64,18 +66,23 @@ class FormController extends AbstractController
                 
             }
 
-            dd($files);
-
+            // dd($files);
+            // Save to DB
             $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+            // $em->persist($post);
+            // $em->flush();
         }
+
+        $result = $fetcher->get('https://api.coinmarketcap.com/v2/listings/');
+        // $result = $fetcher->get('www.google.com');
+        $partialArray = $paginator->getPartial($result['data'], 0, 15);
+
 
         return $this->render('form/index.html.twig', [
             'controller_name' => 'FormController',
             'post_form' => $form->createView(),
             'image' => $image,
-            'getURL' => $fetcher->get('https://api.coinmarketcap.com/v2/listings/'),
+            'partial_array' => $partialArray,
         ]);
     }
 
